@@ -5,6 +5,8 @@
 
 package vista;
 
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 /**
  *
  * @author Andy Abad
@@ -12,7 +14,8 @@ package vista;
 public class Practica0303 {
 
     public static void main(String[] args) {
-        AsignaturaVista av=new AsignaturaVista();
-        av.setVisible(true);
+        VentanaPrincipalAsignatura vpa=new VentanaPrincipalAsignatura();
+        vpa.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        vpa.setVisible(true);
     }
 }

@@ -16,6 +16,7 @@ public interface IAsignaturaServicio
 {
     public Asignatura crear(Asignatura asignatura);
     public ArrayList<Asignatura> listar();
-   /*public Carrera crearCarrera(Carrera carrera);
+    /*public Carrera crearCarrera(Carrera carrera);
     public Profesor crearProfesor(Profesor profesor);*/
+    public Asignatura modificar(Asignatura asignatura, int posicion);
 }

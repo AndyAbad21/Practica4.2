@@ -17,8 +17,6 @@ import modelo.Profesor;
 public class AsignaturaServicio implements IAsignaturaServicio
 {
     private static ArrayList<Asignatura> asignaturaList=new ArrayList();
-    private static ArrayList<Profesor> profesorList=new ArrayList();
-    private static ArrayList<Carrera> carreraList=new ArrayList();
     
     @Override
     public Asignatura crear(Asignatura asignatura)
@@ -32,19 +30,27 @@ public class AsignaturaServicio implements IAsignaturaServicio
     {
         return asignaturaList;
     }
-/*
-    @Override
+
+    /*@Override
     public Carrera crearCarrera(Carrera carrera) 
     {
-        carreraList.add(carrera);
+        
         return carrera;
     }
 
     @Override
     public Profesor crearProfesor(Profesor profesor) 
     {
-        profesorList.add(profesor);
+        
         return profesor;
+    }*/
+
+    @Override
+    public Asignatura modificar(Asignatura asignatura, int posicion) 
+    {
+        asignaturaList.remove(posicion);
+        asignaturaList.add(posicion, asignatura);
+        return asignatura;
     }
-*/
+
 }

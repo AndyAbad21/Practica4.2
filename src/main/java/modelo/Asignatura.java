@@ -17,8 +17,8 @@ public class Asignatura
     private String codigoAsignatura;
     private int horasPractica;
     private String modalidad;
-    private ArrayList<Carrera> carreraList;
-    private ArrayList<Profesor> profesorList;
+    private ArrayList<Carrera> carreraList=new ArrayList();
+    private ArrayList<Profesor> profesorList=new ArrayList();
     //Constructor
     public Asignatura(String nombre, int horas, String codigoAsignatura, int horasPractica, String modalidad) {
         this.nombre = nombre;
@@ -62,16 +62,24 @@ public class Asignatura
     public void setModalidad(String modalidad) {
         this.modalidad = modalidad;
     }
-    //Metodos
-    public ArrayList<Carrera> agregarCarrera(ArrayList<Carrera> carreraList)
+    public ArrayList<Carrera> getCarreraList()
     {
-        this.carreraList=carreraList;
         return carreraList;
     }
-    public ArrayList<Profesor> agregarProfesor(ArrayList<Profesor> profesorList)
+    public ArrayList<Profesor> getProfesorList()
     {
-        this.profesorList=profesorList;
         return profesorList;
+    }
+    //Metodos
+    public Carrera agregarCarrera(Carrera carrera)
+    {
+        carreraList.add(carrera);
+        return carrera;
+    }
+    public Profesor agregarProfesor(Profesor profesor)
+    {
+        profesorList.add(profesor);
+        return profesor;
     }
     
     public int cacularHorasDeExamenes()

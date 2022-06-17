@@ -18,10 +18,11 @@ public class Profesor
     private String mesNacimiento;
     private int anioNacimiento;
     private int aniosTrabajo;
+    private String codigo;
     //Constructor
     public Profesor(String nombre, String correo, String titulo, 
             int diaNacimiento, String mesNacimiento, int anioNacimiento,
-            int aniosTrabajo) {
+            int aniosTrabajo, String codigo) {
         this.nombre = nombre;
         this.correo = correo;
         this.titulo = titulo;
@@ -29,6 +30,7 @@ public class Profesor
         this.mesNacimiento = mesNacimiento;
         this.anioNacimiento = anioNacimiento;
         this.aniosTrabajo = aniosTrabajo;
+        this.codigo=codigo;
     }
     //Getters y Setters
 
@@ -80,6 +82,14 @@ public class Profesor
     public void setAniosTrabajo(int aniosTrabajo) {
         this.aniosTrabajo = aniosTrabajo;
     }
+    public String getCodigo()
+    {
+        return codigo;
+    }
+    public void setCodigo(String codigo)
+    {
+        this.codigo=codigo;
+    }
     //Metodos
     public Double calcularSuelo()
     {
@@ -99,7 +109,7 @@ public class Profesor
     {
         return "Nombre: "+nombre+"\n"+"Correo: "+correo+"\n"+"Titulo: "+titulo+"\n"+
                 "Fecha Nacimiento: "+diaNacimiento+"/"+mesNacimiento+"/"+anioNacimiento+
-                "\n"+"Anios de Trabajo: "+aniosTrabajo;
+                "\n"+"Anios de Trabajo: "+aniosTrabajo+"\n"+"Codigo: "+codigo;
     }
     
 }
