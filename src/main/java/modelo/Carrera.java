@@ -47,10 +47,10 @@ public class Carrera
         this.titulo = titulo;
     }
     
-    public int getHorasPractica() {
+    public int getHorasPasantias() {
         return horasPasantias;
     }
-    public void setHorasPractica(int horasPasantias) {
+    public void setHorasPasantias(int horasPasantias) {
         this.horasPasantias = horasPasantias;
     }
 

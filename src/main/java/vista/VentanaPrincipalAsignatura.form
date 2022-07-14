@@ -8,9 +8,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Asignatura"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu1ActionPerformed"/>
-          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
@@ -22,7 +19,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Listar Asignaturas"/>
+                <Property name="text" type="java.lang.String" value="Listar Asignatura"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
@@ -40,6 +37,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar Asignatura"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -58,7 +58,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Listar Carreras"/>
+                <Property name="text" type="java.lang.String" value="Listar Carrera"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
@@ -68,11 +68,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar Carrera"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem7ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar Carrera"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem8ActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -101,12 +107,52 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar Profesor"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem11ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar Profesor"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem12ActionPerformed"/>
+              </Events>
             </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Configuracion"/>
+          </Properties>
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="jMenu5">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Lenguaje"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonMenuItem1">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Espaniol"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonMenuItem1ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonMenuItem2">
+                  <Properties>
+                    <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="false" type="code"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Ingles"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonMenuItem2ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
           </SubComponents>
         </Menu>
       </SubComponents>

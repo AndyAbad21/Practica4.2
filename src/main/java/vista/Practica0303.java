@@ -5,6 +5,8 @@
 
 package vista;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
@@ -14,6 +16,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class Practica0303 {
 
     public static void main(String[] args) {
+        //ResourceBundle resourceBundle=ResourceBundle.getBundle("mensajes.mensajes",new Locale("es","EC"));
         VentanaPrincipalAsignatura vpa=new VentanaPrincipalAsignatura();
         vpa.setDefaultCloseOperation(EXIT_ON_CLOSE);
         vpa.setVisible(true);

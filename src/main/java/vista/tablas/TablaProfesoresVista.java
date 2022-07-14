@@ -1,10 +1,12 @@
 /*
+_|}(=[8-p70oi98u7y6t54
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package vista.tablas;
 
 import controlador.AsignaturaControl;
+import java.util.ResourceBundle;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import modelo.Asignatura;
@@ -39,6 +41,7 @@ public class TablaProfesoresVista extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -65,6 +68,13 @@ public class TablaProfesoresVista extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Actualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,6 +92,10 @@ public class TablaProfesoresVista extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(254, 254, 254))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +106,9 @@ public class TablaProfesoresVista extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -109,23 +125,50 @@ public class TablaProfesoresVista extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void setLenguajeTablaProfesorVista(ResourceBundle resourceBundle)
+    {
+        this.resourceBundle=resourceBundle;
+        jLabel1.setText(resourceBundle.getString("JLABELTPV1"));
+        jLabel2.setText(resourceBundle.getString("JLABELTPV2")+": ");
+        jButton1.setText(resourceBundle.getString("JBUTTON2"));
+        this.setModeloTabla();
+        
+    }
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        String codigo=jTextField1.getText();
-        jTable1.setModel(this.actualizarTableCarrera(asignaturaControl.listar().get(asignaturaControl.buscarPosicion(codigo))));
-        System.out.println("Se encontro");
+        
         
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    public TableModel actualizarTableCarrera(Asignatura asignatura)
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String codigo=jTextField1.getText();
+        this.actualizarTableCarrera(asignaturaControl.listar().get(asignaturaControl.buscarAsignaturaPorCodigo(codigo)));
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    public void setModeloTabla()
     {
         String[] encabezado=new String[6];
-        encabezado[0]="Codigo";
-        encabezado[1]="Nombre";
-        encabezado[2]="Correo";
-        encabezado[3]="Titulo";
-        encabezado[4]="Fecha nacimiento";
-        encabezado[5]="Anios de trabajo";
+        encabezado[0]=resourceBundle.getString("JTABLETPV1");
+        encabezado[1]=resourceBundle.getString("JTABLETPV2");
+        encabezado[2]=resourceBundle.getString("JTABLETPV3");
+        encabezado[3]=resourceBundle.getString("JTABLETPV4");
+        encabezado[4]=resourceBundle.getString("JTABLETPV5");
+        encabezado[5]=resourceBundle.getString("JTABLETPV6");
+        
+        var datos=new Object[0][6];
+        
+        TableModel modeloTabla=new DefaultTableModel(datos, encabezado);
+        jTable1.setModel(modeloTabla);
+    }
+    public void actualizarTableCarrera(Asignatura asignatura)
+    {
+        String[] encabezado=new String[6];
+        encabezado[0]=resourceBundle.getString("JTABLETPV1");
+        encabezado[1]=resourceBundle.getString("JTABLETPV2");
+        encabezado[2]=resourceBundle.getString("JTABLETPV3");
+        encabezado[3]=resourceBundle.getString("JTABLETPV4");
+        encabezado[4]=resourceBundle.getString("JTABLETPV5");
+        encabezado[5]=resourceBundle.getString("JTABLETPV6");
         
         var datos=new Object[asignatura.getProfesorList().size()][6];
         int i=0;
@@ -141,10 +184,12 @@ public class TablaProfesoresVista extends javax.swing.JInternalFrame {
             i++;
         }
         TableModel modeloTabla=new DefaultTableModel(datos, encabezado);
-        return modeloTabla;
+        jTable1.setModel(modeloTabla);
     }
-     AsignaturaControl asignaturaControl=new AsignaturaControl();
+    AsignaturaControl asignaturaControl=new AsignaturaControl();
+    ResourceBundle resourceBundle;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

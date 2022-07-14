@@ -18,5 +18,11 @@ public interface IAsignaturaServicio
     public ArrayList<Asignatura> listar();
     /*public Carrera crearCarrera(Carrera carrera);
     public Profesor crearProfesor(Profesor profesor);*/
-    public Asignatura modificar(Asignatura asignatura, int posicion);
+    public Asignatura modificarAsignatura(Asignatura asignatura, int posicion);
+    public Carrera modificarCarrera(Carrera carrera, int posicionA, int posicionC);
+    public Profesor modificarProfesor(Profesor profesor, int posicionA, int posicionP);
+    public Asignatura eliminarAsignatura(int posicion);
+    public Carrera eliminarCarrera(int posicionA, int posicionC);
+    public Profesor eliminarProfesor(int posicionA, int posicionP);
+    //public boolean validarCodigoAsignatura(String codigo);
 }

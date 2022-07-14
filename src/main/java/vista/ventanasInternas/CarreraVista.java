@@ -5,18 +5,19 @@
 package vista.ventanasInternas;
 
 import controlador.AsignaturaControl;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Andy Abad
  */
-public class CarreraVentana extends javax.swing.JInternalFrame {
+public class CarreraVista extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CarreraVentana
      */
-    public CarreraVentana() {
+    public CarreraVista() {
         initComponents();
     }
 
@@ -49,11 +50,11 @@ public class CarreraVentana extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setPreferredSize(new java.awt.Dimension(400, 500));
+        setPreferredSize(new java.awt.Dimension(400, 375));
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(400, 500));
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 375));
 
-        jLabel1.setText("Carrera");
+        jLabel1.setText("Formulario de Carrera");
 
         jLabel2.setText("Nombre:");
 
@@ -95,7 +96,6 @@ public class CarreraVentana extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -107,6 +107,10 @@ public class CarreraVentana extends javax.swing.JInternalFrame {
                 .addGap(175, 175, 175)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(108, 108, 108))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +142,7 @@ public class CarreraVentana extends javax.swing.JInternalFrame {
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jButton1)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,12 +153,23 @@ public class CarreraVentana extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void setLenguajeCarreraVentana(ResourceBundle resourceBundle)
+    {
+        jLabel1.setText(resourceBundle.getString("JLABELCV1"));
+        jLabel2.setText(resourceBundle.getString("JLABELCV2")+": ");
+        jLabel3.setText(resourceBundle.getString("JLABELCV3")+": ");
+        jLabel4.setText(resourceBundle.getString("JLABELCV4")+": ");
+        jLabel5.setText(resourceBundle.getString("JLABELCV5")+": ");
+        jLabel6.setText(resourceBundle.getString("JLABELCV6")+": ");
+        jLabel7.setText(resourceBundle.getString("JLABELCV7")+": ");
+        
+        jButton1.setText(resourceBundle.getString("JBUTTON1"));
+    }
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
@@ -167,17 +182,64 @@ public class CarreraVentana extends javax.swing.JInternalFrame {
        args[3]=jTextField4.getText();
        args[4]=jTextField5.getText();
        args[5]=jTextField6.getText();
+       int llave1=JOptionPane.showConfirmDialog(this,
+               "Esta seguro que desea guardar la carrera",
+               "Confirmar el guardado de los datos",JOptionPane.OK_CANCEL_OPTION,
+               JOptionPane.WARNING_MESSAGE);
+       if(llave1==0)
+       {
+            try{
+                asignaturaControl.crearCarrera(args);
        
-       asignaturaControl.crearCarrera(args);
-       
-       jTextField1.setText("");
-       jTextField2.setText("");
-       jTextField3.setText("");
-       jTextField4.setText("");
-       jTextField5.setText("");
-       jTextField6.setText("");
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");
+                JOptionPane.showMessageDialog(null, "La carrera se guardo correctamente",
+                        "Mensaje de informacion",JOptionPane.INFORMATION_MESSAGE);
+            }catch (NullPointerException ex)
+            {
+                JOptionPane.showMessageDialog(this,
+                        "La carrera con el codigo: ("+args[1]+") ya existe",
+                        "Error al guardar la carrera",JOptionPane.ERROR_MESSAGE);
+            }catch(NumberFormatException ex)
+            {
+                try{
+                    asignaturaControl.stringAInt(args[3]);
+                }catch(NumberFormatException ex2)   
+                { 
+                    JOptionPane.showMessageDialog(this,
+                    "El campo:( Horas de pasantias: "+args[3]+") tiene formato invalido",
+                    "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                }           
+            }catch(RuntimeException ex)
+            {
+                JOptionPane.showMessageDialog(null,
+                    "La asignatura con el codigo:("+args[5]+") no existe",
+                    "Error al guardar",JOptionPane.ERROR_MESSAGE);
+            }
+       }else if(llave1==2)
+       {
+           int llave2=JOptionPane.showConfirmDialog(this,"Desea vaciar los datos del formulario",
+                   "Vaciar los datos del formulario",JOptionPane.OK_CANCEL_OPTION,
+                   JOptionPane.INFORMATION_MESSAGE);
+           if(llave2==0)
+           {
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");
+           }else if(llave2==2)
+           {
+               
+           }
+       }
       
-       JOptionPane.showMessageDialog(null, "La carrera se guardo correctamente");
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     AsignaturaControl asignaturaControl=new AsignaturaControl();

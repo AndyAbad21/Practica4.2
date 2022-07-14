@@ -62,6 +62,7 @@ public class Asignatura
     public void setModalidad(String modalidad) {
         this.modalidad = modalidad;
     }
+    
     public ArrayList<Carrera> getCarreraList()
     {
         return carreraList;

@@ -5,6 +5,7 @@
 package vista.ventanasInternas;
 
 import controlador.AsignaturaControl;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,9 +36,9 @@ public class AsignaturaVista extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -48,9 +49,9 @@ public class AsignaturaVista extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setPreferredSize(new java.awt.Dimension(500, 500));
+        setPreferredSize(new java.awt.Dimension(500, 325));
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(400, 500));
+        jPanel1.setPreferredSize(new java.awt.Dimension(500, 325));
 
         jLabel1.setText("Asignatura");
 
@@ -61,6 +62,8 @@ public class AsignaturaVista extends javax.swing.JInternalFrame {
         jLabel4.setText("Codigo de Asignatura: ");
 
         jLabel5.setText("Horas de Practica: ");
+
+        jLabel6.setText("Modalidad: ");
 
         jRadioButton1.setText("Presencial");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -75,8 +78,6 @@ public class AsignaturaVista extends javax.swing.JInternalFrame {
                 jRadioButton2ActionPerformed(evt);
             }
         });
-
-        jLabel6.setText("Modalidad: ");
 
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -110,16 +111,16 @@ public class AsignaturaVista extends javax.swing.JInternalFrame {
                         .addComponent(jRadioButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton2)))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(149, 149, 149))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(221, 221, 221))))
+                        .addGap(221, 221, 221))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,49 +149,146 @@ public class AsignaturaVista extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(0, 200, Short.MAX_VALUE))
+                .addGap(0, 36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String[] args=new String[5];
-        String modalidad="";
-        if(jRadioButton1.isSelected())
-        {
-            modalidad="Presencial";
-        }else if(jRadioButton2.isSelected())
-        {
-            modalidad="En linea";
-        }
-        args[0]=jTextField1.getText();
-        args[1]=jTextField2.getText();
-        args[2]=jTextField3.getText();
-        args[3]=jTextField4.getText();
-        args[4]=modalidad;
+    
+    public void setLenguajeAsignaturaVentana(ResourceBundle resourceBundle)
+    {
+        this.resourceBundle=resourceBundle;
+        jLabel1.setText(resourceBundle.getString("JLABELAV1"));
+        jLabel2.setText(resourceBundle.getString("JLABELAV2")+":");
+        jLabel3.setText(resourceBundle.getString("JLABELAV3")+":");
+        jLabel4.setText(resourceBundle.getString("JLABELAV4")+":");
+        jLabel5.setText(resourceBundle.getString("JLABELAV5")+":");
+        jLabel6.setText(resourceBundle.getString("JLABELAV6")+":");
         
-        asignaturaControl.crear(args);
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jRadioButton1.setSelected(false);
-        jRadioButton2.setSelected(false);
-        JOptionPane.showMessageDialog(null,"La asignatura se agrego correctamente");
+        jRadioButton1.setText(resourceBundle.getString("JRADIOBUTTONAV1"));
+        jRadioButton2.setText(resourceBundle.getString("JRADIOBUTTONAV2"));
+        
+        jButton1.setText(resourceBundle.getString("JBUTTON1"));
+        
+        
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //try{    
+            String[] args=new String[5];
+            String modalidad="";
+            boolean llave=false;
+            int llave2=-1;
+            
+            if(jRadioButton1.isSelected())
+            {
+                modalidad="Presencial";
+                llave=true;
+            }else if(jRadioButton2.isSelected())
+            {
+                modalidad="En linea";
+                llave=true;
+            }
+            
+            if(llave==false)
+            {
+                JOptionPane.showMessageDialog(this,resourceBundle.getString("TEXTOJOPTIONPANE11"),
+                resourceBundle.getString("TEXTOJOPTIONPANE12"),JOptionPane.ERROR_MESSAGE);
+            }else if(llave==true)
+            {
+                llave2=JOptionPane.showConfirmDialog(this,
+                resourceBundle.getString("TEXTOJOPTIONPANE21"),
+                resourceBundle.getString("TEXTOJOPTIONPANE22"),JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+            }
+            
+            args[0]=jTextField1.getText();
+            args[1]=jTextField2.getText();
+            args[2]=jTextField3.getText();
+            args[3]=jTextField4.getText();
+            args[4]=modalidad;
+            if(llave2==0)
+            {
+                try{
+                    asignaturaControl.crear(args);
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextField3.setText("");
+                    jTextField4.setText("");
+                    jRadioButton1.setSelected(false);
+                    jRadioButton2.setSelected(false);
+                    JOptionPane.showMessageDialog(this,
+                            "La asignatura se guardo correctamente",
+                            "Mensaje de informacion",JOptionPane.INFORMATION_MESSAGE);
+                }catch(NullPointerException ex)
+                {
+                    JOptionPane.showMessageDialog(this,
+                            "La asignatura con el codigo:("+args[2]+") ya existe",
+                            "Error al guardar",JOptionPane.ERROR_MESSAGE);
+                }
+                catch(NumberFormatException ex)
+                {
+                    for(int i=0;i<2;i++)
+                    {
+                        if(i==0)
+                        {
+                            try{
+                                asignaturaControl.stringAInt(args[1]);
+                            }catch(NumberFormatException ex2)   
+                            { 
+                                JOptionPane.showMessageDialog(this,
+                                "El campo:( Horas: "+args[1]+") tiene formato invalido",
+                                "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                            }
+                        }else if(i==1)
+                        {
+                            try{
+                                asignaturaControl.stringAInt(args[3]);
+                            }catch(NumberFormatException ex2)   
+                            {
+                                JOptionPane.showMessageDialog(this,
+                                "El campo:( Horas de Practica: "+args[3]+") tiene formato invalido",
+                                "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    }
+                }
+                catch(RuntimeException ex){
+                    JOptionPane.showMessageDialog(this,"Error de ejercucion",
+                            "RuntimeException",JOptionPane.ERROR_MESSAGE);
+                }
+                
+
+            }else if (llave2==2)
+            {
+                int llave3=JOptionPane.showConfirmDialog(this,
+                        resourceBundle.getString("TEXTOJOPTIONPANE31"),
+                        resourceBundle.getString("TEXTOJOPTIONPANE32"),
+                        JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
+                if(llave3==0)
+                {
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextField3.setText("");
+                    jTextField4.setText("");
+                    jRadioButton1.setSelected(false);
+                    jRadioButton2.setSelected(false);   
+                }else if(llave3==2)
+                {
+                    
+                }
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -208,6 +306,7 @@ public class AsignaturaVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     AsignaturaControl asignaturaControl=new AsignaturaControl();
+    ResourceBundle resourceBundle;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

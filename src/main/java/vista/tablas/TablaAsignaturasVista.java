@@ -5,7 +5,10 @@
 package vista.tablas;
 
 import controlador.AsignaturaControl;
+import java.util.ResourceBundle;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import modelo.Asignatura;
 
 /**
  *
@@ -33,6 +36,7 @@ public class TablaAsignaturasVista extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -47,7 +51,7 @@ public class TablaAsignaturasVista extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Nombre", "Horas", "Horas Practica", "Modalidad"
+                "Codigo", "Nombre", "Horas", "Horas de Practica", "Modalidad"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -59,27 +63,36 @@ public class TablaAsignaturasVista extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Tabla de Asignaturas");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(143, 143, 143)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -90,24 +103,59 @@ public class TablaAsignaturasVista extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jTable1.setModel(asignaturaControl.actualizarDatosAsignatura());
-    }//GEN-LAST:event_jButton1ActionPerformed
-    public void setTableModel()
+    public void setLenguajeTablaAsignaturaVista(ResourceBundle resourceBundle)
+    {  
+        this.resourceBundle=resourceBundle;
+        jLabel1.setText(resourceBundle.getString("JLABELTAV1"));
+        jButton1.setText(resourceBundle.getString("JBUTTON2"));
+        this.actualizarTablaAsignatura();
+    }
+    /*public void actualizarLenguaje()
     {
-        jTable1.setModel(asignaturaControl.actualizarDatosAsignatura());
+        jLabel1.setText(resourceBundle.getString("JLABEL16"));
+        jButton1.setText(resourceBundle.getString("JLABEL17"));
+        this.actualizarTablaAsignatura();
+    }*/
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.actualizarTablaAsignatura();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void actualizarTablaAsignatura()
+    {
+        String[] encabezado=new String[5];
+        encabezado[0]=resourceBundle.getString("JTABLETAV1");
+        encabezado[1]=resourceBundle.getString("JTABLETAV2");
+        encabezado[2]=resourceBundle.getString("JTABLETAV3");
+        encabezado[3]=resourceBundle.getString("JTABLETAV4");
+        encabezado[4]=resourceBundle.getString("JTABLETAV5");
+        
+        var datos=new Object[asignaturaControl.listar().size()][5];
+        int i=0;
+        for(Asignatura asignatura: asignaturaControl.listar())
+        {
+            datos[i][0]=asignatura.getCodigoAsignatura();
+            datos[i][1]=asignatura.getNombre();
+            datos[i][2]=asignatura.getHoras();
+            datos[i][3]=asignatura.getHorasPractica();
+            datos[i][4]=asignatura.getModalidad();
+            i++;
+        }
+        TableModel modeloTabla=new DefaultTableModel(datos, encabezado);
+        jTable1.setModel(modeloTabla);
+        
     }
     
+    
     AsignaturaControl asignaturaControl=new AsignaturaControl();
-
+    ResourceBundle resourceBundle;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

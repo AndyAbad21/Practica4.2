@@ -5,18 +5,21 @@
 package vista.ventanasInternas;
 
 import controlador.AsignaturaControl;
+import java.util.ResourceBundle;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Andy Abad
  */
-public class ProfesorVentana extends javax.swing.JInternalFrame {
+public class ProfesorVista extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ProfesorVentana
      */
-    public ProfesorVentana() {
+    public ProfesorVista() {
         initComponents();
     }
 
@@ -56,7 +59,7 @@ public class ProfesorVentana extends javax.swing.JInternalFrame {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jLabel1.setText("Profesor");
+        jLabel1.setText("Formulario de Profesor");
 
         jLabel2.setText("Nombre: ");
 
@@ -81,7 +84,11 @@ public class ProfesorVentana extends javax.swing.JInternalFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "23", "24", "25", "26", "27", "28", "29", "30" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990" }));
 
@@ -90,20 +97,16 @@ public class ProfesorVentana extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(jLabel1)
-                .addGap(182, 182, 182))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -125,16 +128,20 @@ public class ProfesorVentana extends javax.swing.JInternalFrame {
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jComboBox3, 0, 66, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -185,7 +192,35 @@ public class ProfesorVentana extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void setLenguajeProfesorVentana(ResourceBundle resourceBundle)
+    {
+        jLabel1.setText(resourceBundle.getString("JLABELPV1"));
+        jLabel2.setText(resourceBundle.getString("JLABELPV2")+": ");
+        jLabel3.setText(resourceBundle.getString("JLABELPV3")+": ");
+        jLabel4.setText(resourceBundle.getString("JLABELPV4")+": ");
+        jLabel5.setText(resourceBundle.getString("JLABELPV5")+": ");
+        jLabel6.setText(resourceBundle.getString("JLABELPV6")+": ");
+        jLabel7.setText(resourceBundle.getString("JLABELPV7")+": ");
+        jLabel8.setText(resourceBundle.getString("JLABELPV8")+": ");
+        
+        
+        jComboBox2.removeAllItems();
+        jComboBox2.addItem(resourceBundle.getString("MES1"));
+        jComboBox2.addItem(resourceBundle.getString("MES2"));
+        jComboBox2.addItem(resourceBundle.getString("MES3"));
+        jComboBox2.addItem(resourceBundle.getString("MES4"));
+        jComboBox2.addItem(resourceBundle.getString("MES5"));
+        jComboBox2.addItem(resourceBundle.getString("MES6"));
+        jComboBox2.addItem(resourceBundle.getString("MES7"));
+        jComboBox2.addItem(resourceBundle.getString("MES8"));
+        jComboBox2.addItem(resourceBundle.getString("MES9"));
+        jComboBox2.addItem(resourceBundle.getString("MES10"));
+        jComboBox2.addItem(resourceBundle.getString("MES11"));
+        jComboBox2.addItem(resourceBundle.getString("MES12"));
+        
+        jButton1.setText(resourceBundle.getString("JBUTTON1"));
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String[] args=new String[9];
         
@@ -199,17 +234,66 @@ public class ProfesorVentana extends javax.swing.JInternalFrame {
         args[7]=jTextField5.getText();
         args[8]=jTextField6.getText();
         
-        asignaturaControl.crearProfesor(args);
-        
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField6.setText("");
-        
-        JOptionPane.showMessageDialog(null, "El prefesor se guardo correctamente");
+        int llave=JOptionPane.showConfirmDialog(this,
+                "Estas seguro que deseas guardar el profesor",
+                "Mensaje de confirmacion",JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+        if(llave==0)
+        {
+            try{
+                asignaturaControl.crearProfesor(args);
+
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");
+
+                JOptionPane.showMessageDialog(null, "El prefesor se guardo correctamente",
+                        "Mensaje de informacion",JOptionPane.INFORMATION_MESSAGE);
+            }catch(NullPointerException ex)
+            {
+                JOptionPane.showMessageDialog(this,
+                        "El profesor con el codigo:("+args[7]+") ya existe",
+                        "Error al guardar Profesor",JOptionPane.ERROR_MESSAGE);
+            }catch(NumberFormatException ex)
+            {
+                try{
+                    asignaturaControl.stringAInt(args[6]);
+                }catch(NumberFormatException ex2)   
+                { 
+                    JOptionPane.showMessageDialog(this,
+                    "El campo:( Anios de trabajo: "+args[6]+") tiene formato invalido",
+                    "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }catch(RuntimeException ex)
+            {
+                JOptionPane.showMessageDialog(this,"La asignatura con el codigo: ("+args[8]+") no existe",
+                        "Error al guardar el profesor",JOptionPane.ERROR_MESSAGE);
+            }
+        }else if(llave==2){
+            int llave2=JOptionPane.showConfirmDialog(this,
+                    "Desea vaciar los datos de la tabla","Vaciar formulario de Profesor",
+                    JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
+            if(llave2==0)
+            {
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");
+            }else if(llave2==2)
+            {
+                
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     AsignaturaControl asignaturaControl=new AsignaturaControl();
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,17 +4,26 @@
  */
 package vista;
 
-import vista.ventanasInternas.CarreraVentana;
+import vista.ventanasInternas.CarreraVista;
 import vista.ventanasInternas.AsignaturaVista;
 import vista.tablas.TablaAsignaturasVista;
 import controlador.AsignaturaControl;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.tools.JavaFileManager.Location;
 import modelo.Asignatura;
 import vista.tablas.TablaCarrerasVista;
 import vista.tablas.TablaProfesoresVista;
-import vista.ventanasInternas.ProfesorVentana;
+import vista.ventanasEliminar.AsignaturaEliminarVista;
+import vista.ventanasEliminar.CarreraEliminarVista;
+import vista.ventanasEliminar.ProfesorEliminarVista;
+import vista.ventanasInternas.ProfesorVista;
 import vista.ventanasModificar.AsignaturaModificarVista;
+import vista.ventanasModificar.CarreraModificarVista;
+import vista.ventanasModificar.ProfesorModificarVista;
 
 /**
  *
@@ -26,7 +35,14 @@ public class VentanaPrincipalAsignatura extends javax.swing.JFrame {
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipalAsignatura() {
+        this.setIdiomaPredeterminado();
         initComponents();
+        this.actualizarLenguaje(resourceBundle);
+    }
+    private void setIdiomaPredeterminado()
+    {
+        resourceBundle=ResourceBundle.getBundle("mensajes.mensajes",new Locale("es","EC"));
+      
     }
 
     /**
@@ -56,10 +72,13 @@ public class VentanaPrincipalAsignatura extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(300, 100));
-        setPreferredSize(new java.awt.Dimension(900, 600));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 600));
 
@@ -88,11 +107,6 @@ public class VentanaPrincipalAsignatura extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Asignatura");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
 
         jMenuItem1.setText("Agregar Asignatura");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +116,7 @@ public class VentanaPrincipalAsignatura extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Listar Asignaturas");
+        jMenuItem2.setText("Listar Asignatura");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -119,6 +133,11 @@ public class VentanaPrincipalAsignatura extends javax.swing.JFrame {
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setText("Eliminar Asignatura");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuBar1.add(jMenu1);
@@ -133,7 +152,7 @@ public class VentanaPrincipalAsignatura extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
-        jMenuItem6.setText("Listar Carreras");
+        jMenuItem6.setText("Listar Carrera");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -142,9 +161,19 @@ public class VentanaPrincipalAsignatura extends javax.swing.JFrame {
         jMenu2.add(jMenuItem6);
 
         jMenuItem7.setText("Modificar Carrera");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem7);
 
         jMenuItem8.setText("Eliminar Carrera");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
@@ -168,12 +197,48 @@ public class VentanaPrincipalAsignatura extends javax.swing.JFrame {
         jMenu3.add(jMenuItem10);
 
         jMenuItem11.setText("Modificar Profesor");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem11);
 
         jMenuItem12.setText("Eliminar Profesor");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem12);
 
         jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Configuracion");
+
+        jMenu5.setText("Lenguaje");
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("Espaniol");
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jRadioButtonMenuItem1);
+
+        jRadioButtonMenuItem2.setSelected(false);
+        jRadioButtonMenuItem2.setText("Ingles");
+        jRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jRadioButtonMenuItem2);
+
+        jMenu4.add(jMenu5);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -192,86 +257,141 @@ public class VentanaPrincipalAsignatura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        AsignaturaVista av=new AsignaturaVista();
+        //av.setLenguajeAsignaturaVentana(resourceBundle);
         av.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        jDesktopPane1.add(av);
         av.setVisible(true);
+        jDesktopPane1.add(av);
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        /*TablaAsignaturasVista tav=new TablaAsignaturasVista();
+     
+        tav.actualizarTablaAsignatura();
         tav.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        tav.setTableModel(this.actualizarTableAsignatura());*/
-        
-        jDesktopPane1.add(asignaturaControl.actualizarTablaAsignatura());
-        //asignaturaControl.actualizarTablaAsignatura();
-        System.out.println("Si entro");
-        
+        jDesktopPane1.add(tav);
+        tav.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        CarreraVentana cv=new CarreraVentana();
+     
         cv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         jDesktopPane1.add(cv);
         cv.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        ProfesorVentana pv=new ProfesorVentana();
+        
         pv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         jDesktopPane1.add(pv);
         pv.setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        TablaProfesoresVista tpv=new TablaProfesoresVista();
+        
         tpv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         jDesktopPane1.add(tpv);
         tpv.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        TablaCarrerasVista tcv=new TablaCarrerasVista();
+        
         tcv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         tcv.setVisible(true);
         jDesktopPane1.add(tcv);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        AsignaturaModificarVista amv=new AsignaturaModificarVista();
+
         amv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         jDesktopPane1.add(amv);
         amv.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+
+        jRadioButtonMenuItem2.setSelected(false);
+        resourceBundle=ResourceBundle.getBundle("mensajes.mensajes",new Locale("es","EC"));
+        this.actualizarLenguaje(resourceBundle);
+    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+
+    private void jRadioButtonMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
+        jRadioButtonMenuItem1.setSelected(false);
+        resourceBundle=ResourceBundle.getBundle("mensajes.mensajes",new Locale("en","US"));
+        this.actualizarLenguaje(resourceBundle);
+    }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        cmv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        cmv.setVisible(true);
+        jDesktopPane1.add(cmv);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        pmv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        pmv.setVisible(true);
+        jDesktopPane1.add(pmv);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        aev.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        aev.setVisible(true);
+        jDesktopPane1.add(aev);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        cev.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        cev.setVisible(true);
+        jDesktopPane1.add(cev);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        pev.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        pev.setVisible(true);
+        jDesktopPane1.add(pev);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
     
-    /*public TableModel actualizarTableAsignatura()
+    private void actualizarLenguaje(ResourceBundle resourceBundle)
     {
-        String[] encabezado=new String[5];
-        encabezado[0]="Codigo";
-        encabezado[1]="Nombre";
-        encabezado[2]="Horas";
-        encabezado[3]="Horas Practica";
-        encabezado[4]="Modalidad";
+        this.setLenguajeVentanaPrincipal(resourceBundle);
+        av.setLenguajeAsignaturaVentana(resourceBundle);
+        cv.setLenguajeCarreraVentana(resourceBundle);
+        pv.setLenguajeProfesorVentana(resourceBundle);
+        tav.setLenguajeTablaAsignaturaVista(resourceBundle);
+        tcv.setLenguajeTablaCarreraVista(resourceBundle);
+        tpv.setLenguajeTablaProfesorVista(resourceBundle);
+        amv.setLenguajeAsignaturaModificarVista(resourceBundle);
+        cmv.setLenguajeCarreraModificarVentana(resourceBundle);
+        pmv.setLenguajeProfesorModificarVentana(resourceBundle);
+        aev.setLenguajeAsignaturaEliminarVentana(resourceBundle);
+        cev.setLenguajeCarreraEliminarVentana(resourceBundle);
+        pev.setLenguajeProfesorEliminarVentana(resourceBundle);
+    }
+    public void setLenguajeVentanaPrincipal(ResourceBundle resourseBundle)
+    {
+        jMenu1.setText(resourceBundle.getString("JMENUVP1"));
+        jMenu2.setText(resourceBundle.getString("JMENUVP2"));
+        jMenu3.setText(resourceBundle.getString("JMENUVP3"));
+        jMenu4.setText(resourceBundle.getString("JMENUVP4"));
+        jMenu5.setText(resourceBundle.getString("JMENUVP5"));
         
-        var datos=new Object[asignaturaControl.listar().size()][5];
-        int i=0;
-        for(Asignatura asignatura: asignaturaControl.listar())
-        {
-            datos[i][0]=asignatura.getCodigoAsignatura();
-            datos[i][1]=asignatura.getNombre();
-            datos[i][2]=asignatura.getHoras();
-            datos[i][3]=asignatura.getHorasPractica();
-            datos[i][4]=asignatura.getModalidad();
-            i++;
-        }
-        TableModel modeloTabla=new DefaultTableModel(datos, encabezado);
-        return modeloTabla;
-    }*/
+        jRadioButtonMenuItem1.setText(resourceBundle.getString("JRADIOBUTTONVP1"));
+        jRadioButtonMenuItem2.setText(resourceBundle.getString("JRADIOBUTTONVP2"));
+        
+        jMenuItem1.setText(resourceBundle.getString("JMENUITEMVP1"));
+        jMenuItem2.setText(resourceBundle.getString("JMENUITEMVP2"));
+        jMenuItem3.setText(resourceBundle.getString("JMENUITEMVP3"));
+        jMenuItem4.setText(resourceBundle.getString("JMENUITEMVP4"));
+        jMenuItem5.setText(resourceBundle.getString("JMENUITEMVP5"));
+        jMenuItem6.setText(resourceBundle.getString("JMENUITEMVP6"));
+        jMenuItem7.setText(resourceBundle.getString("JMENUITEMVP7"));
+        jMenuItem8.setText(resourceBundle.getString("JMENUITEMVP8"));
+        jMenuItem9.setText(resourceBundle.getString("JMENUITEMVP9"));
+        jMenuItem10.setText(resourceBundle.getString("JMENUITEMVP10"));
+        jMenuItem11.setText(resourceBundle.getString("JMENUITEMVP11"));
+        jMenuItem12.setText(resourceBundle.getString("JMENUITEMVP12"));
+        
+    }
     
     /**
      * @param args the command line arguments
@@ -308,12 +428,28 @@ public class VentanaPrincipalAsignatura extends javax.swing.JFrame {
             }
         });
     }
+    ResourceBundle resourceBundle;
     AsignaturaControl asignaturaControl=new AsignaturaControl();
+    AsignaturaVista av=new AsignaturaVista();
+    CarreraVista cv=new CarreraVista();
+    ProfesorVista pv=new ProfesorVista();
+    TablaAsignaturasVista tav=new TablaAsignaturasVista();
+    TablaCarrerasVista tcv=new TablaCarrerasVista();
+    TablaProfesoresVista tpv=new TablaProfesoresVista();
+    AsignaturaModificarVista amv=new AsignaturaModificarVista();
+    CarreraModificarVista cmv=new CarreraModificarVista();
+    ProfesorModificarVista pmv=new ProfesorModificarVista();
+    AsignaturaEliminarVista aev=new AsignaturaEliminarVista();
+    CarreraEliminarVista cev=new CarreraEliminarVista();
+    ProfesorEliminarVista pev=new ProfesorEliminarVista();
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -328,5 +464,7 @@ public class VentanaPrincipalAsignatura extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     // End of variables declaration//GEN-END:variables
 }
