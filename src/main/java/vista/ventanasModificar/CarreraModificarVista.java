@@ -226,6 +226,7 @@ public class CarreraModificarVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Boolean llave2=null;
         int llave=JOptionPane.showConfirmDialog(this,
                 "Esta seguro que desea modificar la carrera",
                 "Confirmar modificar Carrera",JOptionPane.OK_CANCEL_OPTION,
@@ -234,41 +235,85 @@ public class CarreraModificarVista extends javax.swing.JInternalFrame {
         {
             String[] args=new String[7];
 
-            args[0]=jTextField3.getText();
-            args[1]=jTextField4.getText();
-            args[2]=jTextField5.getText();
-            args[3]=jTextField6.getText();
-            args[4]=jTextField7.getText();
-            args[5]=jTextField1.getText();
-            args[6]=jTextField2.getText();
+            if(jTextField3.getText().equals(""))
+            {
+                this.validarJTextField(0, args);
+            }else{
+                args[0]=jTextField3.getText();
+            }
             
-            try{
-                asignaturaControl.modificarCarrera(args);
-
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
-                jTextField4.setText("");
-                jTextField5.setText("");
-                jTextField6.setText("");
-                jTextField7.setText("");
-
-                JOptionPane.showMessageDialog(null, "La carrera se modifico correctamente");
-            }catch(NumberFormatException ex)
+            if(jTextField4.getText().equals(""))
+            {
+                this.validarJTextField(1, args);
+            }else{
+                args[1]=jTextField4.getText();
+            }
+            
+            if(jTextField5.getText().equals(""))
+            {
+                this.validarJTextField(2, args);
+            }else{
+                args[2]=jTextField5.getText();
+            }
+            
+            if(jTextField6.getText().equals(""))
+            {
+                this.validarJTextField(3, args);
+            }else{
+                args[3]=jTextField6.getText();
+            }
+            
+            if(jTextField7.getText().equals(""))
+            {
+                this.validarJTextField(4, args);
+            }else{
+                args[4]=jTextField7.getText();
+            }
+            
+            if(jTextField1.getText().equals(""))
+            {
+                this.validarJTextField(5, args);
+            }else{
+                args[5]=jTextField1.getText();
+            }
+            
+            if(jTextField2.getText().equals(""))
+            {
+                this.validarJTextField(6, args);
+            }else{
+                args[6]=jTextField2.getText();
+            }
+            llave2=true;
+            if(llave2=true)
             {
                 try{
-                    asignaturaControl.stringAInt(args[3]);
-                }catch(NumberFormatException ex2)   
-                { 
-                    JOptionPane.showMessageDialog(this,
-                    "El campo:( Horas de pasantias: "+args[3]+") tiene formato invalido",
-                    "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                    asignaturaControl.modificarCarrera(args);
+
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextField3.setText("");
+                    jTextField4.setText("");
+                    jTextField5.setText("");
+                    jTextField6.setText("");
+                    jTextField7.setText("");
+
+                    JOptionPane.showMessageDialog(null, "La carrera se modifico correctamente");
+                }catch(NumberFormatException ex)
+                {
+                    try{
+                        asignaturaControl.stringAInt(args[3]);
+                    }catch(NumberFormatException ex2)   
+                    { 
+                        JOptionPane.showMessageDialog(this,
+                        "El campo:( Horas de pasantias: "+args[3]+") tiene formato invalido",
+                        "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                }catch(RuntimeException ex)
+                {
+                    JOptionPane.showMessageDialog(null,
+                        "No se encontro la carrera en la asignatura",
+                        "Error al modificar Carrera",JOptionPane.ERROR_MESSAGE);
                 }
-            }catch(RuntimeException ex)
-            {
-                JOptionPane.showMessageDialog(null,
-                    "No se encontro la carrera en la asignatura",
-                    "Error al modificar Carrera",JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -294,7 +339,18 @@ public class CarreraModificarVista extends javax.swing.JInternalFrame {
                     "Error de Carrera",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public void validarJTextField(int i,String[] args)
+    {
+        try{
+            if(args[i].equals(""))
+            {
+                 
+            }
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("");
+        }
+    }
     AsignaturaControl asignaturaControl=new AsignaturaControl();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

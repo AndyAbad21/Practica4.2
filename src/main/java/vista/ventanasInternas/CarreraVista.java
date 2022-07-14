@@ -75,6 +75,12 @@ public class CarreraVista extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
@@ -176,72 +182,127 @@ public class CarreraVista extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        String[] args=new String[6];
-       args[0]=jTextField1.getText();
-       args[1]=jTextField2.getText();
-       args[2]=jTextField3.getText();
-       args[3]=jTextField4.getText();
-       args[4]=jTextField5.getText();
-       args[5]=jTextField6.getText();
-       int llave1=JOptionPane.showConfirmDialog(this,
-               "Esta seguro que desea guardar la carrera",
-               "Confirmar el guardado de los datos",JOptionPane.OK_CANCEL_OPTION,
-               JOptionPane.WARNING_MESSAGE);
-       if(llave1==0)
-       {
-            try{
-                asignaturaControl.crearCarrera(args);
-       
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
-                jTextField4.setText("");
-                jTextField5.setText("");
-                jTextField6.setText("");
-                JOptionPane.showMessageDialog(null, "La carrera se guardo correctamente",
-                        "Mensaje de informacion",JOptionPane.INFORMATION_MESSAGE);
-            }catch (NullPointerException ex)
+       boolean llave=false;
+       try{
+           if(jTextField1.getText().equals(""))
             {
-                JOptionPane.showMessageDialog(this,
-                        "La carrera con el codigo: ("+args[1]+") ya existe",
-                        "Error al guardar la carrera",JOptionPane.ERROR_MESSAGE);
-            }catch(NumberFormatException ex)
+               this.validarJTextField(0, args);
+            }else{
+                args[0]=jTextField1.getText();   
+            }
+            if(jTextField2.getText().equals(""))
+            {
+                this.validarJTextField(1, args);
+            }else{
+                args[1]=jTextField2.getText();
+            }
+            if(jTextField3.getText().equals(""))
+            {
+                this.validarJTextField(2, args);
+            }else{
+                args[2]=jTextField3.getText();
+            }
+            
+            args[3]=jTextField4.getText();
+            
+            if(jTextField5.getText().equals(""))
+            {
+                this.validarJTextField(4, args);
+            }else{
+                args[4]=jTextField5.getText();
+            }
+            
+            if(jTextField6.getText().equals(""))
+            {
+                this.validarJTextField(5, args);
+            }else{
+                args[5]=jTextField6.getText();
+            }
+            
+            llave=true;
+       }catch(RuntimeException ex)
+       {
+           JOptionPane.showMessageDialog(this,"Llene todo los campos de la carrerar"
+                   ,"Error al guardar carrera",JOptionPane.ERROR_MESSAGE);
+       }
+       if(llave==true)
+       {
+           int llave1=JOptionPane.showConfirmDialog(this,
+                        "Esta seguro que desea guardar la carrera",
+                        "Confirmar el guardado de los datos",JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.WARNING_MESSAGE);
+            if(llave1==0)
             {
                 try{
-                    asignaturaControl.stringAInt(args[3]);
-                }catch(NumberFormatException ex2)   
-                { 
+                    asignaturaControl.crearCarrera(args);
+
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextField3.setText("");
+                    jTextField4.setText("");
+                    jTextField5.setText("");
+                    jTextField6.setText("");
+                    JOptionPane.showMessageDialog(null, "La carrera se guardo correctamente",
+                                 "Mensaje de informacion",JOptionPane.INFORMATION_MESSAGE);
+                }catch (NullPointerException ex)
+                {
                     JOptionPane.showMessageDialog(this,
-                    "El campo:( Horas de pasantias: "+args[3]+") tiene formato invalido",
-                    "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
-                }           
-            }catch(RuntimeException ex)
+                        "La carrera con el codigo: ("+args[1]+") ya existe",
+                        "Error al guardar la carrera",JOptionPane.ERROR_MESSAGE);
+                }catch(NumberFormatException ex)
+                {
+                    try{
+                        asignaturaControl.stringAInt(args[3]);
+                    }catch(NumberFormatException ex2)   
+                    { 
+                        JOptionPane.showMessageDialog(this,
+                            "El campo:( Horas de pasantias: "+args[3]+") tiene formato invalido",
+                            "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                    }           
+                }catch(RuntimeException ex)
+                {
+                    JOptionPane.showMessageDialog(null,
+                        "La asignatura con el codigo:("+args[5]+") no existe",
+                        "Error al guardar",JOptionPane.ERROR_MESSAGE);
+                }
+                llave=false;
+            }else if(llave1==2)
             {
-                JOptionPane.showMessageDialog(null,
-                    "La asignatura con el codigo:("+args[5]+") no existe",
-                    "Error al guardar",JOptionPane.ERROR_MESSAGE);
+                int llave2=JOptionPane.showConfirmDialog(this,"Desea vaciar los datos del formulario",
+                    "Vaciar los datos del formulario",JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE);
+                if(llave2==0)
+                {
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextField3.setText("");
+                    jTextField4.setText("");
+                    jTextField5.setText("");
+                    jTextField6.setText("");
+                }else if(llave2==2)
+                {
+
+                }
             }
-       }else if(llave1==2)
-       {
-           int llave2=JOptionPane.showConfirmDialog(this,"Desea vaciar los datos del formulario",
-                   "Vaciar los datos del formulario",JOptionPane.OK_CANCEL_OPTION,
-                   JOptionPane.INFORMATION_MESSAGE);
-           if(llave2==0)
-           {
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
-                jTextField4.setText("");
-                jTextField5.setText("");
-                jTextField6.setText("");
-           }else if(llave2==2)
-           {
-               
-           }
        }
-      
-       
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    public void validarJTextField(int i,String[] args)
+    {
+        try{
+            if(args[i].equals(""))
+            {
+                 
+            }
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("");
+        }
+    }
     AsignaturaControl asignaturaControl=new AsignaturaControl();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -138,14 +138,9 @@ public class AsignaturaEliminarVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        try{
-            this.setActualizarTabla();
-        }catch(RuntimeException ex)
+        if(!jTextField1.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,
-                    "El codigo de la asignatura: ("+jTextField1.getText()+") no existe",
-                    "Error al Buscar",JOptionPane.ERROR_MESSAGE);
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -222,75 +222,140 @@ public class ProfesorVista extends javax.swing.JInternalFrame {
         jButton1.setText(resourceBundle.getString("JBUTTON1"));
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String[] args=new String[9];
-        
-        args[0]=jTextField1.getText();
-        args[1]=jTextField2.getText();
-        args[2]=jTextField3.getText();
-        args[3]=jComboBox1.getSelectedItem()+"";
-        args[4]=jComboBox2.getSelectedItem()+"";
-        args[5]=jComboBox3.getSelectedItem()+"";
-        args[6]=jTextField4.getText();
-        args[7]=jTextField5.getText();
-        args[8]=jTextField6.getText();
-        
-        int llave=JOptionPane.showConfirmDialog(this,
-                "Estas seguro que deseas guardar el profesor",
-                "Mensaje de confirmacion",JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.WARNING_MESSAGE);
-        if(llave==0)
-        {
-            try{
-                asignaturaControl.crearProfesor(args);
-
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
-                jTextField4.setText("");
-                jTextField5.setText("");
-                jTextField6.setText("");
-
-                JOptionPane.showMessageDialog(null, "El prefesor se guardo correctamente",
-                        "Mensaje de informacion",JOptionPane.INFORMATION_MESSAGE);
-            }catch(NullPointerException ex)
+        try{
+            String[] args=new String[9];
+            boolean llave0=false;
+            if(jTextField1.getText().equals(""))
             {
-                JOptionPane.showMessageDialog(this,
-                        "El profesor con el codigo:("+args[7]+") ya existe",
-                        "Error al guardar Profesor",JOptionPane.ERROR_MESSAGE);
-            }catch(NumberFormatException ex)
+                this.validarJTextField(0, args);
+            }else{
+                args[0]=jTextField1.getText();
+            }
+            
+            if(jTextField2.getText().equals(""))
             {
-                try{
-                    asignaturaControl.stringAInt(args[6]);
-                }catch(NumberFormatException ex2)   
-                { 
-                    JOptionPane.showMessageDialog(this,
-                    "El campo:( Anios de trabajo: "+args[6]+") tiene formato invalido",
-                    "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                this.validarJTextField(1, args);
+            }else{
+                args[1]=jTextField2.getText();
+            }
+            
+            if(jTextField3.getText().equals(""))
+            {
+                this.validarJTextField(2, args);
+            }else{
+                args[2]=jTextField3.getText();
+            }
+            
+            if(jTextField4.getText().equals(""))
+            {
+                this.validarJTextField(6, args);
+            }else{
+                args[6]=jTextField4.getText();
+            }
+            
+            if(jTextField5.getText().equals(""))
+            {
+                this.validarJTextField(7, args);
+            }else{
+                args[7]=jTextField5.getText();
+            }
+            
+            if(jTextField5.getText().equals(""))
+            {
+                this.validarJTextField(7, args);
+            }else{
+                args[7]=jTextField5.getText();
+            }
+            
+            if(jTextField6.getText().equals(""))
+            {
+                this.validarJTextField(8, args);
+            }else{
+                args[8]=jTextField6.getText();
+            }
+            
+            args[3]=jComboBox1.getSelectedItem()+"";
+            args[4]=jComboBox2.getSelectedItem()+"";
+            args[5]=jComboBox3.getSelectedItem()+"";
+            llave0=true;
+
+            if(llave0=true)
+            {
+                int llave=JOptionPane.showConfirmDialog(this,
+                    "Estas seguro que deseas guardar el profesor",
+                    "Mensaje de confirmacion",JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+                if(llave==0)
+                {
+                    try{
+                        asignaturaControl.crearProfesor(args);
+
+                        jTextField1.setText("");
+                        jTextField2.setText("");
+                        jTextField3.setText("");
+                        jTextField4.setText("");
+                        jTextField5.setText("");
+                        jTextField6.setText("");
+
+                        JOptionPane.showMessageDialog(null, "El prefesor se guardo correctamente",
+                                "Mensaje de informacion",JOptionPane.INFORMATION_MESSAGE);
+                    }catch(NullPointerException ex)
+                    {
+                        JOptionPane.showMessageDialog(this,
+                                "El profesor con el codigo:("+args[7]+") ya existe",
+                                "Error al guardar Profesor",JOptionPane.ERROR_MESSAGE);
+                    }catch(NumberFormatException ex)
+                    {
+                        try{
+                            asignaturaControl.stringAInt(args[6]);
+                        }catch(NumberFormatException ex2)   
+                        { 
+                            JOptionPane.showMessageDialog(this,
+                            "El campo:( Anios de trabajo: "+args[6]+") tiene formato invalido",
+                            "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                        }
+                    }catch(RuntimeException ex)
+                    {
+                        JOptionPane.showMessageDialog(this,"La asignatura con el codigo: ("+args[8]+") no existe",
+                                "Error al guardar el profesor",JOptionPane.ERROR_MESSAGE);
+                    }
+                }else if(llave==2){
+                    int llave2=JOptionPane.showConfirmDialog(this,
+                            "Desea vaciar los datos de la tabla","Vaciar formulario de Profesor",
+                            JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
+                    if(llave2==0)
+                    {
+                        jTextField1.setText("");
+                        jTextField2.setText("");
+                        jTextField3.setText("");
+                        jTextField4.setText("");
+                        jTextField5.setText("");
+                        jTextField6.setText("");
+                    }else if(llave2==2)
+                    {
+
+                    }
                 }
-            }catch(RuntimeException ex)
-            {
-                JOptionPane.showMessageDialog(this,"La asignatura con el codigo: ("+args[8]+") no existe",
-                        "Error al guardar el profesor",JOptionPane.ERROR_MESSAGE);
+                llave0=false;
             }
-        }else if(llave==2){
-            int llave2=JOptionPane.showConfirmDialog(this,
-                    "Desea vaciar los datos de la tabla","Vaciar formulario de Profesor",
-                    JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
-            if(llave2==0)
-            {
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
-                jTextField4.setText("");
-                jTextField5.setText("");
-                jTextField6.setText("");
-            }else if(llave2==2)
-            {
-                
-            }
+        }catch(RuntimeException ex)
+        {
+            JOptionPane.showMessageDialog(this,"Llene todos los campos del profesor",
+                    "Error al guardar el profesor",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public void validarJTextField(int i,String[] args)
+    {
+        try{
+            if(args[i].equals(""))
+            {
+                 
+            }
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("");
+        }
+    }
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed

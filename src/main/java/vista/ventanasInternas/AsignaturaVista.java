@@ -188,6 +188,7 @@ public class AsignaturaVista extends javax.swing.JInternalFrame {
         //try{    
             String[] args=new String[5];
             String modalidad="";
+            boolean llave0=false;
             boolean llave=false;
             int llave2=-1;
             
@@ -213,24 +214,47 @@ public class AsignaturaVista extends javax.swing.JInternalFrame {
                 JOptionPane.WARNING_MESSAGE);
             }
             
-            args[0]=jTextField1.getText();
-            args[1]=jTextField2.getText();
-            args[2]=jTextField3.getText();
-            args[3]=jTextField4.getText();
-            args[4]=modalidad;
+            try{
+                if(jTextField1.getText().equals(""))
+                {
+                    this.validarJTextField(0, args);
+                }else 
+                {
+                    args[0]=jTextField1.getText();
+                }
+                args[0]=jTextField1.getText();
+                args[1]=jTextField2.getText();
+                if(jTextField3.getText().equals(""))
+                {
+                    this.validarJTextField(2, args);
+                }else{
+                    args[2]=jTextField3.getText();
+                }
+                
+                args[3]=jTextField4.getText();
+                args[4]=modalidad;
+                llave0=true;
+            }catch(RuntimeException ex)
+            {
+                JOptionPane.showMessageDialog(this,"Algunos campos estan vacios","Error al guardar",JOptionPane.ERROR_MESSAGE);
+            }
             if(llave2==0)
             {
                 try{
-                    asignaturaControl.crear(args);
-                    jTextField1.setText("");
-                    jTextField2.setText("");
-                    jTextField3.setText("");
-                    jTextField4.setText("");
-                    jRadioButton1.setSelected(false);
-                    jRadioButton2.setSelected(false);
-                    JOptionPane.showMessageDialog(this,
-                            "La asignatura se guardo correctamente",
-                            "Mensaje de informacion",JOptionPane.INFORMATION_MESSAGE);
+                    if(llave0==true)
+                    {
+                        asignaturaControl.crear(args);
+                        jTextField1.setText("");
+                        jTextField2.setText("");
+                        jTextField3.setText("");
+                        jTextField4.setText("");
+                        jRadioButton1.setSelected(false);
+                        jRadioButton2.setSelected(false);
+                        JOptionPane.showMessageDialog(this,
+                                "La asignatura se guardo correctamente",
+                                "Mensaje de informacion",JOptionPane.INFORMATION_MESSAGE);
+                        llave0=false;
+                    }
                 }catch(NullPointerException ex)
                 {
                     JOptionPane.showMessageDialog(this,
@@ -268,8 +292,6 @@ public class AsignaturaVista extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this,"Error de ejercucion",
                             "RuntimeException",JOptionPane.ERROR_MESSAGE);
                 }
-                
-
             }else if (llave2==2)
             {
                 int llave3=JOptionPane.showConfirmDialog(this,
@@ -291,6 +313,18 @@ public class AsignaturaVista extends javax.swing.JInternalFrame {
             }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void validarJTextField(int i,String[] args)
+    {
+        try{
+            if(args[i].equals(""))
+            {
+                 
+            }
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("");
+        }
+    }
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         if(jRadioButton1.isSelected())
         {

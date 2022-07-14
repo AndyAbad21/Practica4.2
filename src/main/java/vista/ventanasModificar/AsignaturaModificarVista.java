@@ -230,62 +230,98 @@ public class AsignaturaModificarVista extends javax.swing.JInternalFrame {
         if(llave==0)
         {
             String[] args=new String[6];
-                String modalidad="";
-                if(jRadioButton1.isSelected())
-                {
-                    modalidad="Presencial";
-                }else if(jRadioButton2.isSelected())
-                {
-                    modalidad="En linea";
-                }
-                args[0]=jTextField1.getText();
-                args[1]=jTextField2.getText();
-                args[2]=jTextField3.getText();
-                args[3]=jTextField4.getText();
-                args[4]=modalidad;
-                args[5]=jTextField5.getText();
-            try{
-                asignaturaControl.modificarAsignatura(args);
-
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
-                jTextField4.setText("");
-                jTextField5.setText("");
-                jRadioButton1.setSelected(false);
-                jRadioButton2.setSelected(false);
-                JOptionPane.showMessageDialog(null,
-                        "La asignatura se modifico correctamente",
-                        "Mensaje de informacion",JOptionPane.INFORMATION_MESSAGE);
-            }catch(NumberFormatException ex)
+            String modalidad="";
+            Boolean llave2=null;
+            if(jRadioButton1.isSelected())
             {
-                for(int i=0;i<2;i++)
+                modalidad="Presencial";
+            }else if(jRadioButton2.isSelected())
+            {
+                modalidad="En linea";
+            }
+            
+            if(jTextField1.getText().equals(""))
+            {
+                this.validarJTextField(0, args);
+            }else{
+                args[0]=jTextField1.getText();
+            }
+            
+            if(jTextField2.getText().equals(""))
+            {
+                this.validarJTextField(1, args);
+            }else{
+                args[1]=jTextField2.getText();
+            }
+            
+            if(jTextField3.getText().equals(""))
+            {
+                this.validarJTextField(2, args);
+            }else{
+                args[2]=jTextField3.getText();
+            }
+            
+            if(jTextField4.getText().equals(""))
+            {
+                this.validarJTextField(3, args);
+            }else{
+                args[3]=jTextField4.getText();
+            }
+            
+            if(jTextField5.getText().equals(""))
+            {
+                this.validarJTextField(5, args);
+            }else{
+                args[5]=jTextField5.getText();
+            }
+            args[4]=modalidad;
+            llave2=true;
+            if(llave2==true)
+            {
+                try{
+                    asignaturaControl.modificarAsignatura(args);
+
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextField3.setText("");
+                    jTextField4.setText("");
+                    jTextField5.setText("");
+                    jRadioButton1.setSelected(false);
+                    jRadioButton2.setSelected(false);
+                    JOptionPane.showMessageDialog(null,
+                            "La asignatura se modifico correctamente",
+                            "Mensaje de informacion",JOptionPane.INFORMATION_MESSAGE);
+                }catch(NumberFormatException ex)
                 {
-                    if(i==0)
+                    for(int i=0;i<2;i++)
                     {
-                        try{
-                            asignaturaControl.stringAInt(args[1]);
-                        }catch(NumberFormatException ex2)   
-                        { 
-                            JOptionPane.showMessageDialog(this,
-                            "El campo:( Horas: "+args[1]+") tiene formato invalido",
-                            "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
-                        }
-                    }else if(i==1)
-                    {
-                        try{
-                            asignaturaControl.stringAInt(args[3]);
-                        }catch(NumberFormatException ex2)   
+                        if(i==0)
                         {
-                            JOptionPane.showMessageDialog(this,
-                            "El campo:( Horas de Practica: "+args[3]+") tiene formato invalido",
-                            "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                            try{
+                                asignaturaControl.stringAInt(args[1]);
+                            }catch(NumberFormatException ex2)   
+                            { 
+                                JOptionPane.showMessageDialog(this,
+                                "El campo:( Horas: "+args[1]+") tiene formato invalido",
+                                "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                            }
+                        }else if(i==1)
+                        {
+                            try{
+                                asignaturaControl.stringAInt(args[3]);
+                            }catch(NumberFormatException ex2)   
+                            {
+                                JOptionPane.showMessageDialog(this,
+                                "El campo:( Horas de Practica: "+args[3]+") tiene formato invalido",
+                                "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     }
+                }catch(RuntimeException ex)
+                {
+                    JOptionPane.showMessageDialog(this,"El codigo de la asignatura ya existe","Mensaje de Error",JOptionPane.WARNING_MESSAGE);
                 }
-            }catch(RuntimeException ex)
-            {
-                JOptionPane.showMessageDialog(this,"El codigo de la asignatura ya existe","Mensaje de Error",JOptionPane.WARNING_MESSAGE);
+                llave2=false;
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -333,7 +369,18 @@ public class AsignaturaModificarVista extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this,"La asignatura con el codigo:("+codigo+") no existe");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public void validarJTextField(int i,String[] args)
+    {
+        try{
+            if(args[i].equals(""))
+            {
+                 
+            }
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("");
+        }
+    }
     AsignaturaControl asignaturaControl=new AsignaturaControl();
     ResourceBundle resourceBundle;
     // Variables declaration - do not modify//GEN-BEGIN:variables

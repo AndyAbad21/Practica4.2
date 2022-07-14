@@ -242,7 +242,6 @@ public class AsignaturaControl
         }
     }
     public int stringAInt(String cadena)
-            
     {
         try{
             return Integer.valueOf(cadena);
@@ -255,7 +254,6 @@ public class AsignaturaControl
     {
         String llave="";
         try{
-            //boolean llave;
             for(int i=0;i<asignaturaServicio.listar().size();i++)
             {
                 Asignatura asignatura=asignaturaServicio.listar().get(i);

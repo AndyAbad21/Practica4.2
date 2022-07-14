@@ -255,6 +255,7 @@ public class ProfesorModificarVista extends javax.swing.JInternalFrame {
         
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Boolean llave2=null;
         int llave=JOptionPane.showConfirmDialog(this,
                 "Esta seguro que desea modificar el profesor",
                 "Confirmar modificar Profesor",JOptionPane.OK_CANCEL_OPTION,
@@ -263,43 +264,90 @@ public class ProfesorModificarVista extends javax.swing.JInternalFrame {
         {
             String[] args=new String[10];
         
-            args[0]=jTextField3.getText();
-            args[1]=jTextField4.getText();
-            args[2]=jTextField5.getText();
+            if(jTextField3.getText().equals(""))
+            {
+                this.validarJTextField(0, args);
+            }else{
+                args[0]=jTextField3.getText();
+            }
+            
+            if(jTextField4.getText().equals(""))
+            {
+                this.validarJTextField(1, args);
+            }else{
+                args[1]=jTextField4.getText();;
+            }
+            
+            if(jTextField5.getText().equals(""))
+            {
+                this.validarJTextField(2, args);
+            }else{
+                args[2]=jTextField5.getText();
+            }
+            
+            if(jTextField6.getText().equals(""))
+            {
+                this.validarJTextField(6, args);
+            }else{
+                args[6]=jTextField6.getText();
+            }
+            
+            if(jTextField7.getText().equals(""))
+            {
+                this.validarJTextField(7, args);
+            }else{
+                args[7]=jTextField7.getText();
+            }
+            
+            if(jTextField1.getText().equals(""))
+            {
+                this.validarJTextField(8, args);
+            }else{
+                args[8]=jTextField1.getText();
+            }
+            
+            if(jTextField2.getText().equals(""))
+            {
+                this.validarJTextField(9, args);
+            }else{
+                args[9]=jTextField2.getText();
+            }
+
             args[3]=jComboBox1.getSelectedItem()+"";
             args[4]=jComboBox2.getSelectedItem()+"";
             args[5]=jComboBox3.getSelectedItem()+"";
-            args[6]=jTextField6.getText();
-            args[7]=jTextField7.getText();
-            args[8]=jTextField1.getText();
-            args[9]=jTextField2.getText();
-
-            try{
-                asignaturaControl.modificarProfesor(args);
-
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
-                jTextField4.setText("");
-                jTextField5.setText("");
-                jTextField6.setText("");
-                jTextField7.setText("");
-
-                JOptionPane.showMessageDialog(null, "El prefesor se guardo correctamente");
-            }catch(NumberFormatException ex)
+            
+            llave2=true;
+            if(llave2=true)
             {
                 try{
-                    asignaturaControl.stringAInt(args[6]);
-                }catch(NumberFormatException ex2)   
-                { 
-                    JOptionPane.showMessageDialog(this,
-                    "El campo:( Anios de trabajo: "+args[6]+") tiene formato invalido",
-                    "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                    asignaturaControl.modificarProfesor(args);
+
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextField3.setText("");
+                    jTextField4.setText("");
+                    jTextField5.setText("");
+                    jTextField6.setText("");
+                    jTextField7.setText("");
+
+                    JOptionPane.showMessageDialog(null, "El prefesor se guardo correctamente");
+                }catch(NumberFormatException ex)
+                {
+                    try{
+                        asignaturaControl.stringAInt(args[6]);
+                    }catch(NumberFormatException ex2)   
+                    { 
+                        JOptionPane.showMessageDialog(this,
+                        "El campo:( Anios de trabajo: "+args[6]+") tiene formato invalido",
+                        "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                }catch(RuntimeException ex)
+                {
+                    JOptionPane.showMessageDialog(this,"No se encontro el Profesor en la asignatura",
+                            "Error al modificar el profesor",JOptionPane.ERROR_MESSAGE);
                 }
-            }catch(RuntimeException ex)
-            {
-                JOptionPane.showMessageDialog(this,"No se encontro el Profesor en la asignatura",
-                        "Error al modificar el profesor",JOptionPane.ERROR_MESSAGE);
+                llave2=false;
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -338,7 +386,18 @@ public class ProfesorModificarVista extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public void validarJTextField(int i,String[] args)
+    {
+        try{
+            if(args[i].equals(""))
+            {
+                 
+            }
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("");
+        }
+    }
     AsignaturaControl asignaturaControl=new AsignaturaControl();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
