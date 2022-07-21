@@ -5,11 +5,13 @@
 
 package modelo;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Andy Abad
  */
-public class Profesor
+public class Profesor implements Serializable
 {
     private String nombre;
     private String correo;

@@ -4,12 +4,13 @@
  */
 
 package modelo;
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * 
  * @author Andy Abad
  */
-public class Asignatura 
+public class Asignatura implements Serializable
 {
     //Artibutos
     private String nombre;

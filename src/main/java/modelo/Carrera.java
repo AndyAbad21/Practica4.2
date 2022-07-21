@@ -5,11 +5,13 @@
 
 package modelo;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Andy Abad
  */
-public class Carrera
+public class Carrera implements Serializable
 {
     //Atributos
     private String nombre;

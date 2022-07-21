@@ -59,9 +59,9 @@ public class AsignaturaControl
         try{
             this.validarCodigoCarrera(args[5],args[1]);
             carrera=new Carrera(args[0], args[1], args[2], stringAInt(args[3]), args[4]);
-            Asignatura asignatura=asignaturaServicio.listar().get(this.buscarAsignaturaPorCodigo(args[5]));
-            asignatura.agregarCarrera(carrera);
-            return carrera;
+            //Asignatura asignatura=asignaturaServicio.listar().get(this.buscarAsignaturaPorCodigo(args[5]));
+            //asignatura.agregarCarrera(carrera);
+            return asignaturaServicio.crearCarrera(carrera,args[5]);
         }catch(NullPointerException ex)
         {
             throw new NullPointerException("La carrera ya existe");

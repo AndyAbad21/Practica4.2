@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public interface IAsignaturaServicio
 {
     public Asignatura crear(Asignatura asignatura);
+    public Carrera crearCarrera(Carrera carrera,String arg);
     public ArrayList<Asignatura> listar();
     /*public Carrera crearCarrera(Carrera carrera);
     public Profesor crearProfesor(Profesor profesor);*/
@@ -25,4 +26,7 @@ public interface IAsignaturaServicio
     public Carrera eliminarCarrera(int posicionA, int posicionC);
     public Profesor eliminarProfesor(int posicionA, int posicionP);
     //public boolean validarCodigoAsignatura(String codigo);
+    public boolean almacenarEnArchivo(Asignatura asignatura,String ruta) throws Exception;
+    public ArrayList<Asignatura> recuperarDeArchivo(String rutaArvchivo) throws Exception;
+    public boolean eliminarArchivo(String rutaArchivo) throws Exception;
 }
