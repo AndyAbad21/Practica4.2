@@ -59,8 +59,6 @@ public class AsignaturaControl
         try{
             this.validarCodigoCarrera(args[5],args[1]);
             carrera=new Carrera(args[0], args[1], args[2], stringAInt(args[3]), args[4]);
-            //Asignatura asignatura=asignaturaServicio.listar().get(this.buscarAsignaturaPorCodigo(args[5]));
-            //asignatura.agregarCarrera(carrera);
             return asignaturaServicio.crearCarrera(carrera,args[5]);
         }catch(NullPointerException ex)
         {
@@ -79,8 +77,7 @@ public class AsignaturaControl
             this.validarCodigoProfesor(args[8], args[7]);
             profesor=new Profesor(args[0], args[1], args[2], stringAInt(args[3]),
                 args[4], stringAInt(args[5]), stringAInt(args[6]), args[7]);
-            Asignatura asignatura=asignaturaServicio.listar().get(this.buscarAsignaturaPorCodigo(args[8]));
-            asignatura.agregarProfesor(profesor);
+            asignaturaServicio.crearProfesor(profesor, args[8]);
             return profesor;
         }catch(NullPointerException ex)
         {

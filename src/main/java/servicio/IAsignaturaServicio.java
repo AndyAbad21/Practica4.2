@@ -16,6 +16,7 @@ public interface IAsignaturaServicio
 {
     public Asignatura crear(Asignatura asignatura);
     public Carrera crearCarrera(Carrera carrera,String arg);
+    public Profesor crearProfesor(Profesor profesor,String arg);
     public ArrayList<Asignatura> listar();
     /*public Carrera crearCarrera(Carrera carrera);
     public Profesor crearProfesor(Profesor profesor);*/
@@ -29,4 +30,6 @@ public interface IAsignaturaServicio
     public boolean almacenarEnArchivo(Asignatura asignatura,String ruta) throws Exception;
     public ArrayList<Asignatura> recuperarDeArchivo(String rutaArvchivo) throws Exception;
     public boolean eliminarArchivo(String rutaArchivo) throws Exception;
+    //public void validarCodigoAsignatura(String codigo);
+    //public void validarCodigoCarrera(String codigoA,String codigoC);
 }

@@ -8,6 +8,7 @@ package servicio;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -42,18 +43,24 @@ public class AsignaturaServicio implements IAsignaturaServicio
     public Carrera crearCarrera(Carrera carrera,String arg)
     { 
         try{
-            //Asignatura asignatura=this.listar().get(this.buscarAsignaturaPorCodigo(arg));
-            
             try {
                 this.asignaturaList=this.recuperarDeArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
             } catch (Exception ex) {
                 System.out.println("");
             }
-            Asignatura asignatura=asignaturaList.get(this.buscarAsignaturaPorCodigo(arg));
-            asignatura.agregarCarrera(carrera);
+            int posicion=this.buscarAsignaturaPorCodigo(arg);
+            Asignatura asignatura1=asignaturaList.get(posicion);
+            Asignatura asignatura1aux=asignaturaList.get(posicion);
+            asignatura1.agregarCarrera(carrera);
+            asignaturaList.remove(asignatura1aux);
+            asignaturaList.add(posicion,asignatura1);
             try{
                 this.eliminarArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
-                this.almacenarEnArchivo(asignatura,"C:/Carpeta1/ArchivoAsignaturas.obj");
+                for(int i=0;i<asignaturaList.size();i++)
+                {
+                    Asignatura asignatura2=asignaturaList.get(i);
+                    this.almacenarEnArchivo(asignatura2,"C:/Carpeta1/ArchivoAsignaturas.obj");
+                }
             }catch(Exception e1)
             {
                 System.out.println("Error general");
@@ -66,6 +73,47 @@ public class AsignaturaServicio implements IAsignaturaServicio
         }catch(NumberFormatException ex)
         {
             throw new NumberFormatException("Error en el formato del numero");
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("La asignatura no existe");
+        }
+    }
+    @Override
+    public Profesor crearProfesor(Profesor profesor,String arg)
+    {
+        try{
+            
+            Asignatura asignatura=this.listar().get(this.buscarAsignaturaPorCodigo(arg));
+            asignatura.agregarProfesor(profesor);
+            try {
+                this.asignaturaList=this.recuperarDeArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+            } catch (Exception ex) {
+                System.out.println("");
+            }
+            int posicion=this.buscarAsignaturaPorCodigo(arg);
+            Asignatura asignatura1=asignaturaList.get(posicion);
+            Asignatura asignatura1aux=asignaturaList.get(posicion);
+            asignatura1.agregarProfesor(profesor);
+            asignaturaList.remove(asignatura1aux);
+            asignaturaList.add(posicion,asignatura1);
+            try{
+                this.eliminarArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+                for(int i=0;i<asignaturaList.size();i++)
+                {
+                    Asignatura asignatura2=asignaturaList.get(i);
+                    this.almacenarEnArchivo(asignatura2,"C:/Carpeta1/ArchivoAsignaturas.obj");
+                }
+            }catch(Exception e1)
+            {
+                System.out.println("Error general");
+            }
+            return profesor;
+        }catch(NullPointerException ex)
+        {
+            throw new NullPointerException("El codigo de profesor ya existe");
+        }catch(NumberFormatException ex)
+        {
+            throw new NumberFormatException("Error en el formato");
         }catch(RuntimeException ex)
         {
             throw new RuntimeException("La asignatura no existe");
@@ -86,43 +134,218 @@ public class AsignaturaServicio implements IAsignaturaServicio
     @Override
     public Asignatura modificarAsignatura(Asignatura asignatura, int posicion) 
     {
-        asignaturaList.remove(posicion);
-        asignaturaList.add(posicion, asignatura);
+        try{ 
+            try {
+                this.asignaturaList=this.recuperarDeArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+            } catch (Exception ex) {
+                System.out.println("Error al recuperar archivos");
+            }
+            try{
+                this.eliminarArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+                
+                asignaturaList.remove(posicion);
+                asignaturaList.add(posicion, asignatura);
+                for(int i=0;i<asignaturaList.size();i++)
+                {
+                    Asignatura asignatura2=asignaturaList.get(i);
+                    this.almacenarEnArchivo(asignatura2,"C:/Carpeta1/ArchivoAsignaturas.obj");
+                }
+            }catch(Exception e1)
+            {
+                System.out.println("Error general");
+            }
+        }catch(NullPointerException ex)
+        {
+            throw new NullPointerException("El codigo de profesor ya existe");
+        }catch(NumberFormatException ex)
+        {
+            throw new NumberFormatException("Error en el formato");
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("La asignatura no existe");
+        }
         return asignatura;
     }
 
     @Override
     public Carrera modificarCarrera(Carrera carrera, int posicionA, int posicionC) 
     {
-        asignaturaList.get(posicionA).getCarreraList().remove(posicionC);
-        asignaturaList.get(posicionA).getCarreraList().add(posicionC,carrera);
-        return carrera;
+        try{
+            try {
+                this.asignaturaList=this.recuperarDeArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+            } catch (Exception ex) {
+                System.out.println("");
+            }
+            asignaturaList.get(posicionA).getCarreraList().remove(posicionC);
+            asignaturaList.get(posicionA).getCarreraList().add(posicionC,carrera);
+            try{
+                this.eliminarArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+                for(int i=0;i<asignaturaList.size();i++)
+                {
+                    Asignatura asignatura2=asignaturaList.get(i);
+                    this.almacenarEnArchivo(asignatura2,"C:/Carpeta1/ArchivoAsignaturas.obj");
+                }
+            }catch(Exception e1)
+            {
+                System.out.println("Error general");
+            }
+            return carrera;
+        }catch(NullPointerException ex)
+        {
+            throw new NullPointerException("La carrera ya existe");
+        }catch(NumberFormatException ex)
+        {
+            throw new NumberFormatException("Error en el formato del numero");
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("La asignatura no existe");
+        }
     }
 
     @Override
     public Profesor modificarProfesor(Profesor profesor, int posicionA, int posicionP)
     {
-        asignaturaList.get(posicionA).getProfesorList().remove(posicionP);
-        asignaturaList.get(posicionA).getProfesorList().add(posicionP, profesor);
-        return profesor;
+        
+        try{
+            try {
+                this.asignaturaList=this.recuperarDeArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+            } catch (Exception ex) {
+                System.out.println("");
+            }
+            asignaturaList.get(posicionA).getProfesorList().remove(posicionP);
+            asignaturaList.get(posicionA).getProfesorList().add(posicionP, profesor);
+            try{
+                this.eliminarArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+                for(int i=0;i<asignaturaList.size();i++)
+                {
+                    Asignatura asignatura2=asignaturaList.get(i);
+                    this.almacenarEnArchivo(asignatura2,"C:/Carpeta1/ArchivoAsignaturas.obj");
+                }
+            }catch(Exception e1)
+            {
+                System.out.println("Error general");
+            }
+            return profesor;
+        }catch(NullPointerException ex)
+        {
+            throw new NullPointerException("El codigo de profesor ya existe");
+        }catch(NumberFormatException ex)
+        {
+            throw new NumberFormatException("Error en el formato");
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("La asignatura no existe");
+        }
     }
 
     @Override
     public Asignatura eliminarAsignatura(int posicion) 
     {
-        return asignaturaList.remove(posicion); 
+        try{
+            try {
+                this.asignaturaList=this.recuperarDeArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+            } catch (Exception ex) {
+                System.out.println("");
+            }
+            
+            Asignatura asignatura1=asignaturaList.get(posicion);
+            asignaturaList.remove(posicion);
+            try{
+                this.eliminarArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+                for(int i=0;i<asignaturaList.size();i++)
+                {
+                    Asignatura asignatura2=asignaturaList.get(i);
+                    this.almacenarEnArchivo(asignatura2,"C:/Carpeta1/ArchivoAsignaturas.obj");
+                }
+            }catch(Exception e1)
+            {
+                System.out.println("Error general");
+            }
+            
+            return asignatura1; 
+        }catch(NullPointerException ex)
+        {
+            throw new NullPointerException("El codigo de profesor ya existe");
+        }catch(NumberFormatException ex)
+        {
+            throw new NumberFormatException("Error en el formato");
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("La asignatura no existe");
+        }
     }
 
     @Override
     public Carrera eliminarCarrera(int posicionA, int posicionC) 
     {
-        return asignaturaList.get(posicionA).getCarreraList().remove(posicionC);           
+        
+        try{
+            try {
+                this.asignaturaList=this.recuperarDeArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+            } catch (Exception ex) {
+                System.out.println("");
+            }
+            Carrera carrera=asignaturaList.get(posicionA).getCarreraList().get(posicionC);
+            asignaturaList.get(posicionA).getCarreraList().remove(posicionC);
+            try{
+                this.eliminarArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+                for(int i=0;i<asignaturaList.size();i++)
+                {
+                    Asignatura asignatura2=asignaturaList.get(i);
+                    this.almacenarEnArchivo(asignatura2,"C:/Carpeta1/ArchivoAsignaturas.obj");
+                }
+            }catch(Exception e1)
+            {
+                System.out.println("Error general");
+            }
+            
+            return carrera; 
+        }catch(NullPointerException ex)
+        {
+            throw new NullPointerException("El codigo de profesor ya existe");
+        }catch(NumberFormatException ex)
+        {
+            throw new NumberFormatException("Error en el formato");
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("La asignatura no existe");
+        }           
     }
 
     @Override
     public Profesor eliminarProfesor(int posicionA, int posicionP) 
     {
-        return asignaturaList.get(posicionA).getProfesorList().remove(posicionP);
+        try{
+            try {
+                this.asignaturaList=this.recuperarDeArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+            } catch (Exception ex) {
+                System.out.println("");
+            }
+            Profesor profesor=asignaturaList.get(posicionA).getProfesorList().get(posicionP);
+            asignaturaList.get(posicionA).getProfesorList().remove(posicionP);
+            try{
+                this.eliminarArchivo("C:/Carpeta1/ArchivoAsignaturas.obj");
+                for(int i=0;i<asignaturaList.size();i++)
+                {
+                    Asignatura asignatura2=asignaturaList.get(i);
+                    this.almacenarEnArchivo(asignatura2,"C:/Carpeta1/ArchivoAsignaturas.obj");
+                }
+            }catch(Exception e1)
+            {
+                System.out.println("Error general");
+            }
+            
+            return profesor; 
+        }catch(NullPointerException ex)
+        {
+            throw new NullPointerException("El codigo de profesor ya existe");
+        }catch(NumberFormatException ex)
+        {
+            throw new NumberFormatException("Error en el formato");
+        }catch(RuntimeException ex)
+        {
+            throw new RuntimeException("La asignatura no existe");
+        }         
     }
     
     @Override
@@ -157,8 +380,6 @@ public class AsignaturaServicio implements IAsignaturaServicio
         }catch(Exception ex){
             entrada.close();
         }
-        System.out.println("Si entro al recuperar archivos");
-        System.out.println(asignaturaList);
         return asignaturaList;
         
     }
@@ -188,16 +409,32 @@ public class AsignaturaServicio implements IAsignaturaServicio
     @Override
     public boolean eliminarArchivo(String rutaArchivo) throws Exception {
         boolean llave=false;
-        ObjectOutputStream salida=null;
-        try{
-            salida = new ObjectOutputStream(new FileOutputStream(new File(rutaArchivo),false));
-            salida;
-            salida.close();
-            llave=true;
-        }catch(Exception e1){
-            System.out.println(e1.toString());
-            salida.close();
-        }
+        File archivo = new File(rutaArchivo);
+        archivo.delete();
         return llave;
     }
+    /*@Override
+    public void validarCodigoAsignatura(String codigo)
+    {
+        String llave="";
+        try{
+            for(int i=0;i<this.listar().size();i++)
+            {
+                Asignatura asignatura=this.listar().get(i);
+                if(asignatura.getCodigoAsignatura().equals(codigo))
+                {
+                    llave=null;
+                    break;
+                }
+            }
+            if(llave.equals(""))
+            {
+                
+            }
+        }catch(NullPointerException ex)
+        {
+            throw new NullPointerException("");
+        }
+    }*/
+
 }
